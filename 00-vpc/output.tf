@@ -2,3 +2,5 @@
    value = module.aws_vpc.availability_zone
 
 } 
+
+
