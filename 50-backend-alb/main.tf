@@ -23,7 +23,8 @@ module "backend_alb" {
 
 
 
-resource "aws_lb_listener" "backend_alb" {
+resource "aws_lb_listener" "backend_alb_lis" {
+  depends_on = [module.backend_alb]
   load_balancer_arn = module.backend_alb.arn
   port              = "80"
   protocol          = "HTTP"
@@ -33,7 +34,7 @@ resource "aws_lb_listener" "backend_alb" {
 
     fixed_response {
       content_type = "text/html"
-      message_body = "<h1> I am rom the backedn team doing alb testing</h1>"
+      message_body = "<h1> I am rom the backend team doing alb testing</h1>"
       status_code  = "200"
     }
   }
