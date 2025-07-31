@@ -108,3 +108,15 @@ module "vpn" {
    security_group_id = module.vpn.sg_id
  }
 
+
+#allowing traffic from vpn to backend application load balancer
+resource "aws_security_group_rule" "backend-alb-vpn" {
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  source_security_group_id = module.vpn.sg_id   # instead of  adding ip address , We will be adding bastion sg_id so the bastion can access it in private 
+  security_group_id = module.backend-alb-sg.sg_id
+}
+
+
